@@ -1,0 +1,10 @@
+.env
+dist
+.idea
+/node_modules/
+.env.*local
+package-lock.json
+uploads/*
+!uploads/1.png
+!uploads/2.png
+.vscode

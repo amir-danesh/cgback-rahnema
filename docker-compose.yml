@@ -1,0 +1,35 @@
+version: '3'
+services:
+  db:
+    image: mysql:8.1.0
+    restart: always
+    ports:
+      - "33066:3306"
+
+    environment:
+      MYSQL_DATABASE: collegegeram
+      MYSQL_USER: moji
+      MYSQL_PASSWORD: root123
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+    volumes:
+      - db_data:/var/lib/mysql
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on: 
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: moji
+      DB_PASS: root123
+      DB_NAME: collegegeram
+      PORT: 3000
+      TOKEN_SECRET: secret
+      EMAIL_HOST_NAME: sandbox.smtp.mailtrap.io
+      EMAIL_HOST_USER: b761e047d4b591
+      EMAIL_HOST_PASS: 34c00e8fd917fb
+      EMAIL_HOST_PORT: 2525
+      SERVER_SWAGGER_URL : http://localhost:3000
+volumes:
+  db_data: {}
